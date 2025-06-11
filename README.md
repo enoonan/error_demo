@@ -18,7 +18,7 @@ A simple Ash app that demonstrates a minimal example of an error with loading co
 I'm running into an error that's very similar to one I encountered before.
 
 - **Ash Code**: [`lib/error_demo/demo.ex`](./lib/error_demo/demo.ex).
-- **Test Code**: [`test/error_demo_test.exs'](./test/error_demo_test.exs)
+- **Test Code**: [`test/error_demo_test.exs`](./test/error_demo_test.exs)
 
 ## Resource Structure / Deets
 
