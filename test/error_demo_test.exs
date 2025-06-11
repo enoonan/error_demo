@@ -5,7 +5,6 @@ defmodule ErrorDemoTest do
 
   test "loads foo and bar" do
     {:ok, grandpappy} = Ash.Changeset.for_create(GrandPappy, :create) |> Ash.create(%{})
-    grandpappy.id |> dbg
 
     {:ok, parent} =
       Ash.Changeset.for_create(Parent, :create, %{"grandpappy_id" => grandpappy.id})
@@ -16,7 +15,7 @@ defmodule ErrorDemoTest do
       |> Ash.create()
 
     try do
-      child |> Ash.load([:foo, :baz])
+      child |> Ash.load([:foo, :bar, :baz])
     rescue
       err ->
         err |> dbg
