@@ -107,6 +107,12 @@ defmodule ErrorDemo.Demo do
         public? true
         filter expr(child.parent.grandpappy_id == parent(id))
       end
+
+      has_many :parent_toys, ErrorDemo.Demo.Toy do
+        no_attributes? true
+        public? true
+        filter expr(parent.grandpappy_id == parent(id))
+      end
     end
   end
 

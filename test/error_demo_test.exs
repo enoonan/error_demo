@@ -15,7 +15,13 @@ defmodule ErrorDemoTest do
       Ash.Changeset.for_create(Child, :create, %{"parent_id" => parent.id})
       |> Ash.create()
 
-    child = child |> Ash.load!([:foo, :bar, :baz, parent: [grandpappy: [:grandchild_toys]]])
+    try do
+      child |> Ash.load([:foo, :bar, :baz])
+    rescue
+      err ->
+        err |> dbg
+        assert "an exception was thrown" == false
+    end
 
     assert grandpappy |> is_struct(GrandPappy)
     assert parent |> is_struct(Parent)
