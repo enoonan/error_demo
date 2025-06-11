@@ -16,7 +16,7 @@ defmodule ErrorDemoTest do
       |> Ash.create()
 
     try do
-      child |> Ash.load([:foo, :bar, :baz])
+      child |> Ash.load([:foo, :baz])
     rescue
       err ->
         err |> dbg
