@@ -3,7 +3,7 @@ defmodule ErrorDemoTest do
   alias ErrorDemo.Demo.{Child, Parent, GrandPappy}
   use ErrorDemo.DataCase
 
-  test "loads foo and bar" do
+  setup do
     {:ok, grandpappy} = Ash.Changeset.for_create(GrandPappy, :create) |> Ash.create(%{})
 
     {:ok, parent} =
@@ -14,16 +14,25 @@ defmodule ErrorDemoTest do
       Ash.Changeset.for_create(Child, :create, %{"parent_id" => parent.id})
       |> Ash.create()
 
+    %{child: child}
+  end
+
+  test "loads foo, bar and baz at the same time", %{child: child} do
     try do
-      child |> Ash.load([:foo, :bar, :baz])
+      child = child |> Ash.load([:foo, :bar, :baz])
     rescue
       err ->
         err |> dbg
-        assert "an exception was thrown" == false
+        refute "an exception was thrown"
     end
 
-    assert grandpappy |> is_struct(GrandPappy)
-    assert parent |> is_struct(Parent)
     assert child |> is_struct(Child)
+  end
+
+  test "loads foo, bar and baz separately", %{child: child} do
+    child = child |> Ash.load!([:foo, :bar]) |> Ash.load!(:baz)
+    assert child.foo == "foo"
+    assert child.bar == "bar"
+    assert child.baz == "baz"
   end
 end
