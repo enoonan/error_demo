@@ -1,6 +1,17 @@
 # ErrorDemo
 
-A simple Ash app that demonstrates an error with loading complex relationships.
+A simple Ash app that demonstrates a minimal example of an error with loading complex relationships.
+
+```elixir
+  defp deps do
+    [
+      {:sourceror, "~> 1.8", only: [:dev, :test]},
+      {:ash_postgres, "~> 2.0"},
+      {:ash, "~> 3.0"},
+      {:igniter, "~> 0.6", only: [:dev, :test]}
+    ]
+  end
+```
 
 ## Description
 
