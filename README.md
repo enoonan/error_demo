@@ -2,7 +2,10 @@
 
 A simple Ash app that demonstrates a minimal example of an error with loading complex relationships.
 
+Using Elixir 1.18.2 and Erlang/OTP 27.
+
 ```elixir
+
   defp deps do
     [
       {:sourceror, "~> 1.8", only: [:dev, :test]},
