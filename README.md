@@ -61,3 +61,11 @@ When I add three calculations (`:foo, :bar and :baz`) to `Child`, and all three 
 ```
 
 Loading only two calculations is fine. I also experimented with adding toys to the parent instead of the child, to see if the error would replicate with a smaller relationship graph. It did not. As far as I can tell this is the de minimis example to replicate the error.
+
+The following code also works:
+
+```elixir
+  child = child |> Ash.load!([:foo, :bar]) |> Ash.load!(:baz)
+```
+
+So it only seems to happen when loading all three at the same time.
